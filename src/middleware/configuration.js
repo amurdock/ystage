@@ -1,11 +1,8 @@
 import cosmiconfig from 'cosmiconfig';
+import { name } from '../../package';
 
-const explorer = cosmiconfig('boo');
+const explorer = cosmiconfig(name);
 
-const configuration = async () => {
-  const result = await explorer.search();
-  console.log('*** result ***', result);
-  return {};
-}
+const configuration = () => explorer.search();
 
 export default configuration;
