@@ -3,9 +3,9 @@ import { configuration, workspacesInfo } from '../../middleware'
 import { depends } from '../../utils';
 import * as staging from './staging';
 
-export const command = 'stage <package-name>';
+export const command = 'create <package-name>';
 
-export const describe = 'Stage a workspace package';
+export const describe = 'Create a staged workspace package';
 
 export const builder = yargs =>
   yargs
@@ -35,6 +35,5 @@ export const handler = async ({ config, packageName, workspaces }) => {
       .map(staging.create)
       .map(staging.seed)
       .map(staging.transform)
-      // .map(staging.install)
   );
 };

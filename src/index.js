@@ -1,5 +1,5 @@
 import yargs from 'yargs/yargs';
-import { stage } from './commands'
+import { create } from './commands'
 
 const main = argv => {
   const context = {};
@@ -9,7 +9,7 @@ const main = argv => {
     .demandCommand(1, 'A command is required. Pass --help to see all available commands and options.')
     .recommendCommands()
     .strict()
-    .command(stage)
+    .command(create)
     .fail((_, err, yargs) => {
       console.log('*** failed ***', err);
     })
