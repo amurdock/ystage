@@ -1,0 +1,41 @@
+{
+  "name": "ystage",
+  "version": "1.0.0",
+  "description": "A tool for managing ci/cd aspects of yarn workspaces.",
+  "keywords": [
+    "ystage",
+    "monorepo"
+  ],
+  "homepage": "https://github.com/amurdock/ystage",
+  "license": "MIT",
+  "author": {
+    "name": "Alasdair Murdock",
+    "email": "alasdair.murdock@mudaless.com"
+  },
+  "bin": {
+    "ystage": "lib/cli.js"
+  },
+  "engines": {
+    "node": ">= 8.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amurdock/ystage.git"
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
+  "dependencies": {
+    "cosmiconfig": "^5.0.7",
+    "import-local": "^2.0.0",
+    "npmlog": "^4.1.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/node": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-plugin-shebang": "^1.0.0"
+  }
+}

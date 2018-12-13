@@ -1,0 +1,19 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "node": "8.11.0"
+      }
+    }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-export-namespace-from",
+    [
+      "babel-plugin-shebang",
+      {
+        "replacement": "#!/usr/bin/env node",
+        "force": false
+      }
+    ]
+  ]
+}
