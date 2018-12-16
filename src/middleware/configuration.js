@@ -3,6 +3,9 @@ import { name } from '../../package';
 
 const explorer = cosmiconfig(name);
 
-const configuration = () => explorer.search();
+const configuration = async argv => ({
+  ...argv,
+  ...await explorer.search()
+});
 
 export default configuration;

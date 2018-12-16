@@ -1,8 +1,8 @@
 import { exec } from '../utils'
 
-const workspaces = async () => {
+const workspaces = async argv => {
   const workspaces = await exec('yarn workspaces info --silent', true);
-  return { workspaces };
+  return { ...argv, workspaces };
 }
 
 export default workspaces;
