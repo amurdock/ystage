@@ -1,6 +1,6 @@
 {
   "name": "ystage",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "A tool for managing ci/cd aspects of yarn workspaces.",
   "keywords": [
     "ystage",
