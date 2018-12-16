@@ -1,4 +1,5 @@
 import { join, basename } from 'path';
+import pipe from 'p-pipe';
 import { configuration, workspacesInfo } from '../../middleware'
 import { depends } from '../../utils';
 import * as staging from './staging';
@@ -14,12 +15,10 @@ export const builder = yargs =>
       type: 'string',
     });
 
-export const middlewares = [
-  configuration,
-  workspacesInfo,
-];
+export const handler = async argv => {
+  const env = await pipe(configuration, workspacesInfo)(argv);
 
-export const handler = async ({ config, packageName, workspaces }) => {
+  const { config, packageName, workspaces } = env;
   const { [packageName]: packageConfig } = workspaces
   if (!packageConfig) {
     throw new Error('Invalid package');
