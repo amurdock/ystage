@@ -25,7 +25,8 @@
   "scripts": {
     "build": "babel src --out-dir lib",
     "test": "echo 'no tests yet'",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepublish": "yarn build"
   },
   "dependencies": {
     "cosmiconfig": "^5.0.7",
