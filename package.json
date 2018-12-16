@@ -1,6 +1,6 @@
 {
   "name": "ystage",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "A tool for managing ci/cd aspects of yarn workspaces.",
   "keywords": [
     "ystage",
@@ -20,10 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amurdock/ystage.git"
+    "url": "https://github.com/amurdock/ystage.git"
   },
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib",
+    "test": "echo 'no tests yet'",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "cosmiconfig": "^5.0.7",
@@ -36,6 +38,7 @@
     "@babel/node": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "babel-plugin-shebang": "^1.0.0"
+    "babel-plugin-shebang": "^1.0.0",
+    "semantic-release": "^15.13.0"
   }
 }
