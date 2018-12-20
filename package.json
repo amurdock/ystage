@@ -67,7 +67,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn precommit"
+      "pre-commit": "yarn precommit && git update-index --again"
     }
   },
   "config": {
