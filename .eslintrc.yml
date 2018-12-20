@@ -1,8 +1,15 @@
 ---
-extends: airbnb/base
+extends:
+  - airbnb/base
+  - plugin:prettier/recommended
 parser: babel-eslint
 env:
   node: true
+rules:
+  quotes:
+    - 2
+    - single
+    - avoid-escape
 overrides:
   - files:
     - src/**/*.spec.js

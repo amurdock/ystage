@@ -1,10 +1,6 @@
 import * as filter from './filter';
 
-const functions = [
-  'byPath',
-  'byPattern',
-  'byScript',
-];
+const functions = ['byPath', 'byPattern', 'byScript'];
 
 describe('filter', () => {
   const allWorkspaces = ['a', 'b', 'c', 'd'].map(name => ({
@@ -12,9 +8,9 @@ describe('filter', () => {
     location: `packages/module-${name}`,
     pkg: {
       scripts: {
-        [name]: `echo ${name}`,
-      },
-    },
+        [name]: `echo ${name}`
+      }
+    }
   }));
 
   it('exposes the expected interface', () => {
@@ -26,9 +22,11 @@ describe('filter', () => {
 
   describe('byPath', () => {
     it('filters the workspaces', () => {
-      const workspaces = filter.byPath(['packages/module-c/src/index.js'])(allWorkspaces);
+      const workspaces = filter.byPath(['packages/module-c/src/index.js'])(
+        allWorkspaces
+      );
 
-      const [,, c] = allWorkspaces;
+      const [, , c] = allWorkspaces;
       const [module] = workspaces;
       expect(workspaces.length).toEqual(1);
       expect(module.location).toEqual(c.location);
@@ -39,7 +37,7 @@ describe('filter', () => {
     it('filters the workspaces', () => {
       const workspaces = filter.byPattern('@+(foo|bar)/*+(a|c)')(allWorkspaces);
 
-      const [a,, c] = allWorkspaces;
+      const [a, , c] = allWorkspaces;
       const [aModule, cModule] = workspaces;
       expect(workspaces.length).toEqual(2);
       expect(aModule).toEqual(a);
