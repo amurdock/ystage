@@ -1,5 +1,5 @@
 import yargs from 'yargs/yargs';
-import { create } from './commands'
+import { run } from './commands'
 
 const main = argv => {
   const context = {};
@@ -9,9 +9,9 @@ const main = argv => {
     .demandCommand(1, 'A command is required. Pass --help to see all available commands and options.')
     .recommendCommands()
     .strict()
-    .command(create)
+    .command(run)
     .fail((_, err, yargs) => {
-      console.log('*** failed ***', err);
+      console.log('*** failed ***', _);
     })
     .parse(argv, context);
 };
