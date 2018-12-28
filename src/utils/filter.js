@@ -11,4 +11,4 @@ export const byPattern = (...patterns) => workspaces =>
   )
 
 export const byScript = scriptName => workspaces =>
-  workspaces.filter(({ pkg }) => !!pkg.scripts[scriptName])
+  workspaces.filter(({ module }) => !!module.scripts[scriptName])

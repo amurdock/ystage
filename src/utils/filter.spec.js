@@ -6,7 +6,7 @@ describe('filter', () => {
   const allWorkspaces = ['a', 'b', 'c', 'd'].map(name => ({
     name: `@foo/bar-${name}`,
     location: `packages/module-${name}`,
-    pkg: {
+    module: {
       scripts: {
         [name]: `echo ${name}`
       }

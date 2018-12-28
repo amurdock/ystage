@@ -1,11 +1,4 @@
-import { exec as _exec } from 'child_process'
-import { promisify } from 'util'
+import exaca from 'execa'
 
-const execute = promisify(_exec)
-
-const proc = async (cmd, json = false) => {
-  const { stdout: response } = await execute(cmd)
-  return json ? JSON.parse(response) : response
-}
-
-export default proc
+export const exec = async (command, args, options = null) =>
+  exaca(command, args, options)
