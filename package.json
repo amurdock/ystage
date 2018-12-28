@@ -27,7 +27,7 @@
     "build": "babel src --out-dir lib",
     "test": "jest --colors",
     "semantic-release": "semantic-release",
-    "precommit": "lint-staged",
+    "precommit": "lint-staged && git update-index --again",
     "prepublish": "yarn build"
   },
   "dependencies": {
