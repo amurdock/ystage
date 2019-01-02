@@ -16,19 +16,21 @@ export const builder = yargs =>
       describe: 'The yarn script to run. Pass flags to send to yarn after --',
       type: 'string'
     })
-// .options({
-//   'git-diff <commit-sha>': {
-//     group: 'Command Options:',
-//     describe: 'Include only packages defined within the `git diff`',
-//     type: 'string',
-//     requiresArg: true,
-//   },
-// })
+    .options({
+      'git-diff <commit-sha>': {
+        group: 'Command Options:',
+        describe: 'Include only packages defined within the `git diff`',
+        type: 'string',
+        requiresArg: true
+      }
+    })
 
 export const handler = async argv => {
-  const { script, workspaces, logger } = await middleware(argv)
+  const { script, workspaces, logger, filterPaths } = await middleware(argv)
 
-  const filteredWorkspaces = filter.byScript(script)(workspaces)
+  const filteredWorkspaces = filter.byPath(filterPaths)(
+    filter.byScript(script)(workspaces)
+  )
   const { length: count } = filteredWorkspaces
 
   logger.info('', 'Executing command in %d packages: %j', count, script)
