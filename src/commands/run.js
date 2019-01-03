@@ -18,21 +18,52 @@ export const builder = yargs =>
     })
     .options({
       'git-diff <commit-sha>': {
-        group: 'Command Options:',
+        group: 'Options:',
         describe: 'Include only packages defined within the `git diff`',
         type: 'string',
         requiresArg: true
+      }
+    })
+    .options({
+      'include-dependencies': {
+        group: 'Options:',
+        describe: 'Include dependent packages',
+        type: 'boolean',
+        requiresArg: false,
+        default: false
       }
     })
 
 export const handler = async argv => {
   const { script, workspaces, logger, filterPaths } = await middleware(argv)
 
-  const filteredWorkspaces = filter.byPath(filterPaths)(
-    filter.byScript(script)(workspaces)
-  )
-  const { length: count } = filteredWorkspaces
+  const scriptFilter = filter.byScript(script)
+  const pathFilter = filter.byPath(filterPaths)
 
+  // / filter the workspaces based on `script` and `filter paths`
+  let filteredWorkspaces = pathFilter(scriptFilter(workspaces))
+
+  // / asked to include dependencies ... add them and don't forget to filter them based on `script`
+  if (argv.includeDependencies) {
+    filteredWorkspaces = filteredWorkspaces.reduce(
+      (accumulation, { workspaceDependencies }) => [
+        ...accumulation,
+        ...scriptFilter(
+          workspaceDependencies
+            .map(name => workspaces.find(({ module }) => module.name === name))
+            .filter(
+              ({ module: outer }) =>
+                !accumulation.find(
+                  ({ module: inner }) => outer.name === inner.name
+                )
+            )
+        )
+      ],
+      filteredWorkspaces
+    )
+  }
+
+  const { length: count } = filteredWorkspaces
   logger.info('', 'Executing command in %d packages: %j', count, script)
 
   const elapsed = timer()
