@@ -24,7 +24,7 @@
   },
   "scripts": {
     "lint": "eslint --fix src/**/*.js",
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib --ignore **/*.spec.js",
     "test": "jest --colors",
     "semantic-release": "semantic-release",
     "precommit": "lint-staged && git update-index --again",

@@ -1,5 +1,13 @@
+import pipe from 'p-pipe'
 import middleware from '../middleware'
-import { filter, proc, timer } from '../utils'
+import { workspace, proc, timer } from '../utils'
+
+const {
+  filterByScript,
+  filterByPath,
+  filterByPattern,
+  includeDependencies
+} = workspace
 
 export const command = 'run <script>'
 
@@ -22,9 +30,14 @@ export const builder = yargs =>
         describe: 'Include only packages defined within the `git diff`',
         type: 'string',
         requiresArg: true
-      }
-    })
-    .options({
+      },
+      'match-pattern': {
+        alias: 'pattern',
+        group: 'Options:',
+        describe: 'Include packages whose name matches the supplied pattern(s)',
+        type: 'array',
+        requiresArg: true
+      },
       'include-dependencies': {
         group: 'Options:',
         describe: 'Include dependent packages',
@@ -35,33 +48,16 @@ export const builder = yargs =>
     })
 
 export const handler = async argv => {
-  const { script, workspaces, logger, filterPaths } = await middleware(argv)
+  const ctx = await middleware(argv)
+  const { script, workspaces, logger } = ctx
 
-  const scriptFilter = filter.byScript(script)
-  const pathFilter = filter.byPath(filterPaths)
-
-  // / filter the workspaces based on `script` and `filter paths`
-  let filteredWorkspaces = pathFilter(scriptFilter(workspaces))
-
-  // / asked to include dependencies ... add them and don't forget to filter them based on `script`
-  if (argv.includeDependencies) {
-    filteredWorkspaces = filteredWorkspaces.reduce(
-      (accumulation, { workspaceDependencies }) => [
-        ...accumulation,
-        ...scriptFilter(
-          workspaceDependencies
-            .map(name => workspaces.find(({ module }) => module.name === name))
-            .filter(
-              ({ module: outer }) =>
-                !accumulation.find(
-                  ({ module: inner }) => outer.name === inner.name
-                )
-            )
-        )
-      ],
-      filteredWorkspaces
-    )
-  }
+  // / filter the workspaces
+  const filteredWorkspaces = await pipe(
+    filterByScript(ctx),
+    filterByPath(ctx),
+    filterByPattern(ctx),
+    includeDependencies(ctx)
+  )(workspaces)
 
   const { length: count } = filteredWorkspaces
   logger.info('', 'Executing command in %d packages: %j', count, script)

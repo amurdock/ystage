@@ -7,6 +7,7 @@ const workspaces = async argv => {
     'info',
     '--silent'
   ])
+
   const all = JSON.parse(response)
 
   // flatten workspaces and load their packages
