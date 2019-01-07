@@ -1,3 +1,14 @@
+# [1.1.0](https://github.com/amurdock/ystage/compare/v1.0.0...v1.1.0) (2019-01-07)
+
+
+### Features
+
+* **commands/run.js:** Allow filtering of the run command based on a git commit sha. ([408b128](https://github.com/amurdock/ystage/commit/408b128))
+* **commands/run.js:** Complete initial release of run command, added logging and fixed error handli ([eb72557](https://github.com/amurdock/ystage/commit/eb72557))
+* **src/commands/run.js:** Added a --include-dependencies command line argument to enable the inclus ([d432d77](https://github.com/amurdock/ystage/commit/d432d77))
+* **src/commands/run.js:** Added pattern filter. ([b46761c](https://github.com/amurdock/ystage/commit/b46761c))
+* **src/commands/run.js:** Added stage argument to run command ([ebd88f5](https://github.com/amurdock/ystage/commit/ebd88f5))
+
 # 1.0.0 (2018-12-16)
 
 
