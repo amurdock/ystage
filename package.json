@@ -23,14 +23,18 @@
     "url": "https://github.com/amurdock/ystage.git"
   },
   "scripts": {
-    "build": "babel src --out-dir lib",
-    "test": "echo 'no tests yet'",
+    "lint": "eslint --fix src/**/*.js",
+    "build": "babel src --out-dir lib --ignore **/*.spec.js",
+    "test": "jest --colors",
     "semantic-release": "semantic-release",
+    "precommit": "lint-staged && git update-index --again",
     "prepublish": "yarn build"
   },
   "dependencies": {
     "cosmiconfig": "^5.0.7",
+    "execa": "^1.0.0",
     "import-local": "^2.0.0",
+    "minimatch": "^3.0.4",
     "npmlog": "^4.1.2",
     "p-pipe": "^1.2.0",
     "yargs": "^12.0.5"
@@ -44,10 +48,28 @@
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/git": "^7.0.5",
     "@semantic-release/npm": "^5.1.2",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "babel-plugin-shebang": "^1.0.0",
     "commitizen": "^3.0.5",
     "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "husky": "^1.3.0",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "prettier-eslint-cli": "^4.7.1",
     "semantic-release": "^15.13.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit && git update-index --again"
+    }
   },
   "config": {
     "commitizen": {

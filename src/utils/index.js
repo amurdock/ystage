@@ -1,3 +1,5 @@
-export { default as exec } from './exec';
-export * as depends from './depends';
-export * as pkg from './pkg';
+export * as exec from './proc'
+export * as pkg from './pkg'
+export * as workspace from './workspace'
+export * as proc from './proc'
+export { default as timer } from './timer'
