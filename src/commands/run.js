@@ -42,8 +42,14 @@ export const builder = yargs =>
         group: 'Options:',
         describe: 'Include dependent packages',
         type: 'boolean',
+        requiresArg: false
+      },
+      stage: {
+        group: 'Options:',
+        describe: 'Run the command within the scope of the staging area',
+        type: 'boolean',
         requiresArg: false,
-        default: false
+        conflicts: ['git-diff', 'match-pattern', 'include-dependencies']
       }
     })
 

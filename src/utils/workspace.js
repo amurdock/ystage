@@ -5,7 +5,7 @@ export const filterByPath = ({ filterPaths }) => workspaces =>
     filterPaths.some(path => path.startsWith(location))
   )
 
-export const filterByPattern = ({ pattern: patterns }) => workspaces =>
+export const filterByPattern = ({ pattern: patterns = ['**'] }) => workspaces =>
   workspaces.filter(({ module }) =>
     patterns.some(pattern => minimatch(module.name, pattern))
   )
