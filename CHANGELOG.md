@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/amurdock/ystage/compare/v1.1.0...v1.2.0) (2019-01-09)
+
+
+### Features
+
+* **stage:** Initial implementation of the new stage command. ([5036281](https://github.com/amurdock/ystage/commit/5036281))
+
 # [1.1.0](https://github.com/amurdock/ystage/compare/v1.0.0...v1.1.0) (2019-01-07)
 
 
