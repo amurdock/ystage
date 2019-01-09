@@ -19,20 +19,15 @@ export const includeDependencies = ctx => workspaces => {
     return workspaces
   }
 
-  // / asked to include dependencies ... add them and don't forget to filter them based on `script`
   return workspaces.reduce(
     (accumulation, { workspaceDependencies }) => [
       ...accumulation,
-      ...filterByScript(ctx)(
-        workspaceDependencies
-          .map(name => workspaces.find(({ module }) => module.name === name))
-          .filter(
-            ({ module: outer }) =>
-              !accumulation.find(
-                ({ module: inner }) => outer.name === inner.name
-              )
-          )
-      )
+      ...workspaceDependencies
+        .map(name => ctx.workspaces.find(({ module }) => module.name === name))
+        .filter(
+          ({ module: outer }) =>
+            !accumulation.find(({ module: inner }) => outer.name === inner.name)
+        )
     ],
     workspaces
   )
