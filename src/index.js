@@ -1,6 +1,6 @@
 import yargs from 'yargs/yargs'
 import log from 'npmlog'
-import { run } from './commands'
+import { run, stage } from './commands'
 
 const main = argv => {
   const context = {}
@@ -15,6 +15,7 @@ const main = argv => {
     .recommendCommands()
     .strict()
     .command(run)
+    .command(stage)
     .fail((msg, err) => {
       const actual = err || new Error(msg)
 

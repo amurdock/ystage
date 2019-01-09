@@ -57,12 +57,12 @@ export const handler = async argv => {
   const ctx = await middleware(argv)
   const { script, workspaces, logger } = ctx
 
-  // / filter the workspaces
+  // filter the workspaces
   const filteredWorkspaces = await pipe(
-    filterByScript(ctx),
     filterByPath(ctx),
     filterByPattern(ctx),
-    includeDependencies(ctx)
+    includeDependencies(ctx),
+    filterByScript(ctx)
   )(workspaces)
 
   const { length: count } = filteredWorkspaces
