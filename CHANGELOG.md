@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/amurdock/ystage/compare/v1.2.1...v1.2.2) (2019-01-10)
+
+
+### Bug Fixes
+
+* **stage:** Switch back to using relative paths as absolute paths won't work in a docker container. ([351074a](https://github.com/amurdock/ystage/commit/351074a))
+
 ## [1.2.1](https://github.com/amurdock/ystage/compare/v1.2.0...v1.2.1) (2019-01-10)
 
 
