@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join, relative } from 'path'
 import series from 'p-series'
 import { proc, pkg } from '../../utils'
 
@@ -15,11 +15,13 @@ const flatten = (workspaces, { workspaceDependencies }) =>
       workspaceDependencies
     )
 
-const resolvePackagePaths = (dependencies, locations) =>
+const resolvePackagePaths = (dependencies, locations, root) =>
   Object.entries(dependencies).reduce(
     (acc, [name, value]) => ({
       ...acc,
-      [name]: locations[name] ? `file://${locations[name]}` : value
+      [name]: locations[name]
+        ? `./${relative(locations[root], locations[name])}`
+        : value
     }),
     {}
   )
@@ -55,14 +57,18 @@ const stage = async (workspace, ctx, root) => {
   }
 }
 
-const transform = async (workspaceDependencies, locations) =>
+const transform = async (workspaceDependencies, locations, root) =>
   await Promise.all(
     workspaceDependencies.map(async workspace => {
       const { module } = workspace
       await pkg.saveToPath(join(locations[module.name], 'package.json'), {
         ...module,
-        dependencies: resolvePackagePaths(module.dependencies, locations),
-        devDependencies: resolvePackagePaths(module.devDependencies, locations)
+        dependencies: resolvePackagePaths(module.dependencies, locations, root),
+        devDependencies: resolvePackagePaths(
+          module.devDependencies,
+          locations,
+          root
+        )
       })
     })
   )
@@ -92,7 +98,7 @@ const stageWorkSpace = async (workspace, ctx) => {
   )
 
   // transform workspaces
-  await transform(workspaceDependencies, locations)
+  await transform(workspaceDependencies, locations, name)
 
   if (!ctx.install) {
     return
