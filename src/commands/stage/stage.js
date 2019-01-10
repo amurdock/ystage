@@ -15,8 +15,8 @@ const flatten = (workspaces, { workspaceDependencies }) =>
       workspaceDependencies
     )
 
-const resolvePackagePaths = ({ module, location }, locations) =>
-  Object.entries(module.dependencies).reduce(
+const resolvePackagePaths = (dependencies, locations) =>
+  Object.entries(dependencies).reduce(
     (acc, [name, value]) => ({
       ...acc,
       [name]: locations[name] ? `file://${locations[name]}` : value
@@ -61,7 +61,8 @@ const transform = async (workspaceDependencies, locations) =>
       const { module } = workspace
       await pkg.saveToPath(join(locations[module.name], 'package.json'), {
         ...module,
-        dependencies: resolvePackagePaths(workspace, locations)
+        dependencies: resolvePackagePaths(module.dependencies, locations),
+        devDependencies: resolvePackagePaths(module.devDependencies, locations)
       })
     })
   )
