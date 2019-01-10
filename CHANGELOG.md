@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/amurdock/ystage/compare/v1.2.0...v1.2.1) (2019-01-10)
+
+
+### Bug Fixes
+
+* **stage:** Fix logging of correct command. ([55bc2ba](https://github.com/amurdock/ystage/commit/55bc2ba))
+* **stage:** Fix resolution of development dependencies. ([811d57a](https://github.com/amurdock/ystage/commit/811d57a))
+
 # [1.2.0](https://github.com/amurdock/ystage/compare/v1.1.0...v1.2.0) (2019-01-09)
 
 
