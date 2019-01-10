@@ -48,7 +48,7 @@ export const handler = async argv => {
   )(workspaces)
 
   const { length: count } = filteredRootWorkspaces
-  logger.info('', 'Executing create on %d packages', count)
+  logger.info('', 'Executing stage on %d packages', count)
 
   const elapsed = timer()
 
