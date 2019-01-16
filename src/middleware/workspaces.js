@@ -30,7 +30,7 @@ const yarnWorkspaces = async () => {
 const stageWorkspaces = async ({ config }) => {
   const { stdout: response } = await proc.exec(
     'find',
-    [join(config.stage.path, '*'), '-maxdepth 0', '-type d'],
+    [join(config.path, '*'), '-maxdepth 0', '-type d'],
     { shell: true }
   )
 

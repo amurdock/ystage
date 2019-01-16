@@ -60,24 +60,12 @@ export const handler = async argv => {
     Promise.resolve([])
   )
 
-  runs
-    .then(() => {
-      logger.success(
-        '',
-        "Ran npm script '%s' in %d packages in %ss:",
-        script,
-        count,
-        elapsed()
-      )
+  runs.then(() => {
+    logger.success('', 'Ran stage for %d packages in %ss:', count, elapsed())
 
-      logger.success(
-        '',
-        filteredRootWorkspaces
-          .map(({ module }) => `- ${module.name}`)
-          .join('\n')
-      )
-    })
-    .catch(err => {
-      process.exitCode = err.code
-    })
+    logger.success(
+      '',
+      filteredRootWorkspaces.map(({ module }) => `- ${module.name}`).join('\n')
+    )
+  })
 }

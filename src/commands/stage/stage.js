@@ -31,9 +31,9 @@ const stage = async (workspace, ctx, root) => {
   const { config } = ctx
   const { name, version } = module
 
-  const base = join(process.cwd(), config.stage.path, basename(root))
+  const base = join(process.cwd(), config.path, basename(root))
   const location =
-    root === name ? base : join(base, config.stage.path, basename(name))
+    root === name ? base : join(base, config.path, basename(name))
   const filename = join(location, `${basename(name)}-v${version}.tgz`)
 
   await series([

@@ -9,12 +9,8 @@ const configuration = async argv => {
   return {
     ...argv,
     config: {
-      log: {
-        level: 'info'
-      },
-      stage: {
-        path: './.stage'
-      },
+      loglevel: 'info',
+      path: './.stage',
       ...config
     }
   }
