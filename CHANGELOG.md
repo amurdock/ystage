@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/amurdock/ystage/compare/v1.2.2...v1.2.3) (2019-01-16)
+
+
+### Bug Fixes
+
+* **Configuration:** fixed configuration for loglevel and path ([1c892a0](https://github.com/amurdock/ystage/commit/1c892a0))
+
 ## [1.2.2](https://github.com/amurdock/ystage/compare/v1.2.1...v1.2.2) (2019-01-10)
 
 
