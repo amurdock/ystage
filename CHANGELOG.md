@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/amurdock/ystage/compare/v1.2.3...v1.3.0) (2019-01-21)
+
+
+### Features
+
+* **run:** Include forwarded parameters for run command ([e79be3c](https://github.com/amurdock/ystage/commit/e79be3c))
+
 ## [1.2.3](https://github.com/amurdock/ystage/compare/v1.2.2...v1.2.3) (2019-01-16)
 
 
