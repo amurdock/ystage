@@ -70,12 +70,14 @@ export const handler = async argv => {
 
   const elapsed = timer()
 
+  const forwardArgs = argv._.slice(1)
+
   const runs = filteredWorkspaces.reduce(
     (promiseChain, { location: cwd }) =>
       promiseChain.then(results =>
         Promise.all([
           ...results,
-          proc.spawn('yarn', ['run', script], {
+          proc.spawn('yarn', ['run', script, ...forwardArgs], {
             cwd,
             stdio: 'pipe',
             reject: true
